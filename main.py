@@ -4,7 +4,6 @@
 в которых первая цифра равна 2, из которых определить максимальное число и их количество."""
 
 import re
-
 def _regular(filename):
     with open(filename, 'r') as file:
         data = file.read()
@@ -16,18 +15,25 @@ def _regular(filename):
 
     _sum = sum(numbers)
     count = len(numbers)
-    max_number = max(numbers) if numbers else None
 
-    return _sum, count, max_number
+    if numbers:
+        max_number = max(numbers)
+        max_count = numbers.count(max_number)
+    else:
+        max_number = None
+        max_count = 0
+
+    return _sum, count, max_number, max_count
 
 def main():
     filename = 'ekzamen.txt'
-    _sum, count, max_number = _regular(filename)
+    total_sum, count, max_number, max_count = _regular(filename)
 
-    print("Сумма натуральных четных пятиразрядных чисел с первой цифрой 2:", _sum)
+    print("Сумма натуральных четных пятиразрядных чисел с первой цифрой 2:", total_sum)
     print("Колво найденных чисел:", count)
     if max_number is not None:
         print("Макс число:", max_number)
+        print("Колво макс чисел:", max_count)
     else:
         print("Ни одного подходящего числа не найдено.")
 
